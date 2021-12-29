@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+<h:head>
+	<h:outputStylesheet library="css" name="common-style.css" />
+</h:head>
+<body>
+<ui:composition template="/resources/templates/layout.xhtml">
+		<ui:define name="content">
+	<f:view>
+		<h:form>
+			<h4>Formulaire de connexion</h4>
+			<div>
+				<h:panelGrid columns="3" cellpadding="0" cellspacing="3">
+
+					<h:outputLabel value="Email :"></h:outputLabel>
+					<h:inputText id="email" value="#{userbean.email}" required="true" requiredMessage="L'email est obligatoire!"
+						label="Email" validatorMessage="#{userbean.email} is not valid !">
+						<f:validateRegex
+							pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
+					</h:inputText>
+					<h:message for="email" />
+					
+					<h:outputLabel value="Mot de Passe :"></h:outputLabel>
+					<h:inputSecret value="#{userbean.password}" required="true" requiredMessage="Le mot de passe est obligatoire!"
+						id="password">
+					</h:inputSecret>
+					<h:message for="password" />
+
+				</h:panelGrid>
+			</div>
+
+			<p></p>
+
+			<div>
+
+				<h:panelGrid columns="3" cellpadding="4" cellspacing="0">
+					<h:commandButton value="Connexion" action="#{userbean.connexionUser()}" />
+					
+					<h:commandButton value="Retour" outcome="main5" />
+				</h:panelGrid>
+			</div>
+
+			<div>
+				<h:outputText value="#{userbean.errorMessage}" style="color:red"></h:outputText>
+				<h:outputText value="#{userbean.validateMessage}"
+					style="color:green"></h:outputText>
+			</div>
+		</h:form>
+
+	</f:view>
+			</ui:define>
+	</ui:composition>
+</body>
+
+</html>

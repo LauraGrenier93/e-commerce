@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+<h:head>
+	<h:outputStylesheet library="css" name="common-style.css" />
+</h:head>
+<body>
+<ui:composition template="/resources/templates/layout.xhtml">
+		<ui:define name="content">
+	<f:view>
+		<h:form>
+			<h4>Formulaire d'inscription</h4>
+				<div>
+				<h:panelGrid columns="3" cellpadding="0" cellspacing="3">
+					<h:outputLabel value="Nom :"></h:outputLabel>
+					<h:inputText value="#{userbean.nom}" required="true" requiredMessage="Le nom est obligatoire!" id="nom">
+					<f:validateLength minimum="2" maximum="10" />
+					</h:inputText>
+					<h:message for="nom" />
+					
+					<h:outputLabel value="Prénom :"></h:outputLabel>
+					<h:inputText value="#{userbean.prenom}" required="true" requiredMessage="Le prénom est obligatoire!" id="prenom">
+					<f:validateLength minimum="2" maximum="10" />
+					</h:inputText>
+					<h:message for="prenom" />
+					
+					<h:outputLabel value="Mot de Passe :"></h:outputLabel>
+					<h:inputSecret value="#{userbean.password}" required="true" requiredMessage="Le mot de passe est obligatoire!"
+						id="password">
+					</h:inputSecret>
+					<h:message for="password" />
+					
+					<h:outputLabel value="Date de naissance :"></h:outputLabel>
+					<h:inputText value="#{userbean.dateNaissance}" required="true"
+						requiredMessage="La date de naissance est obligatoire!"
+						id="datenaissance">
+					</h:inputText>
+					<h:message for="datenaissance" style="color:red" />
+
+					<h:outputLabel value="Genre :"></h:outputLabel>
+					<h:selectOneRadio value="#{userbean.genre}" required="true" 
+						id="genre">
+						<f:selectItem itemLabel="Homme" itemValue="homme"></f:selectItem>
+						<f:selectItem itemLabel="Femme" itemValue="femme"></f:selectItem>
+					</h:selectOneRadio>
+					<h:message for="genre" />
+
+					<h:outputLabel value="Téléphone :"></h:outputLabel>
+					<h:inputText type="tel" value="#{userbean.telephone}"
+						required="true" id="telephone"></h:inputText>
+					<h:message for="telephone" />
+
+					<h:outputLabel value="Email :"></h:outputLabel>
+					<h:inputText id="email" value="#{userbean.email}" required="true" requiredMessage="L'email est obligatoire!"
+						label="Email" validatorMessage="#{userbean.email} is not valid !">
+						<f:validateRegex
+							pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
+					</h:inputText>
+					<h:message for="email" />
+
+				</h:panelGrid>
+			</div>
+
+			<p></p>
+
+			<div>
+
+				<h:panelGrid columns="3" cellpadding="4" cellspacing="0">
+					<h:commandButton value="Inscription" action="#{userbean.getUser()}" />
+					
+					<h:commandButton value="Retour" outcome="main5" />
+				</h:panelGrid>
+			</div>
+
+			<div>
+				<h:outputText value="#{userbean.errorMessage}" style="color:red"></h:outputText>
+				<h:outputText value="#{userbean.validateMessage}"
+					style="color:green"></h:outputText>
+			</div>
+		</h:form>
+
+	</f:view>
+			</ui:define>
+	</ui:composition>
+</body>
+
+</html>
